@@ -1,0 +1,12 @@
+[project]
+name = "litegrate"
+version = "0.1.0"
+requires-python = ">= 3.14"
+
+[dependency-groups]
+dev = [
+  "cleek",
+]
+
+[tool.pyright]
+typeCheckingMode = "strict"
