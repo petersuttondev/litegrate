@@ -329,7 +329,7 @@ class AlterTable:
             frags.append(prefix())
             frags.append(init or column.name)
             frags.append('\n')
-        frags.append(f') FROM {self.table.name}')
+        frags.append(f'FROM {self.table.name}')
         return ''.join(frags)
 
     @property
