@@ -339,7 +339,6 @@ class AlterTable:
         yield f'DROP TABLE {self.table.name}'
         yield f'ALTER TABLE {self.temp_table.name} RENAME TO {self.table.name}'
 
-
     def _insert_column(
         self,
         existing_column: str,
@@ -374,6 +373,14 @@ class AlterTable:
     ) -> Column:
         self._insert_column(existing_column, 1, new_column, init)
         return new_column
+
+    def drop_column(self, column: Column | str) -> None:
+        if isinstance(column, str):
+            column = self.temp_table[column]
+        self.temp_table.columns.remove(column)
+
+    def drop_primary_key(self) -> None:
+        self.temp_table.primary_key = None
 
     def append_unique_constraint(self, columns: Iterable[Column | str]) -> None:
         self.temp_table.unique_constraints.append(
